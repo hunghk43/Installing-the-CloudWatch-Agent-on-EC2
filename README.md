@@ -1,9 +1,9 @@
 # Installing CloudWatch Agent on EC2
-**Session 02 – Mastering AWS System Monitoring**
+
 
 ---
 
-## Cách nhanh nhất: Dùng Terraform (tự động toàn bộ)
+## Dùng lệnh sau
 
 ```bash
 cd terraform
@@ -18,7 +18,7 @@ Terraform sẽ tự tạo:
 - Cài & khởi động CloudWatch Agent qua `user_data`
 - CloudWatch Log Groups + Dashboard + Alarm CPU > 80%
 
-Sau khi apply, connect vào EC2 (không cần SSH key):
+Sau khi apply, connect vào EC2:
 ```bash
 # Lệnh này có trong terraform output
 aws ssm start-session --target <instance_id> --region ap-southeast-1
@@ -26,7 +26,7 @@ aws ssm start-session --target <instance_id> --region ap-southeast-1
 
 ---
 
-## Cách thủ công (theo slide)
+## Cách thủ công 
 
 ### Prerequisite
 EC2 IAM Role phải đính kèm policy: **CloudWatchAgentServerPolicy**
@@ -45,7 +45,7 @@ chmod +x apply-config-without-wizard.sh
 
 ---
 
-## Các bước thủ công (theo slide)
+## Các bước thủ công 
 
 ### 1. Install Agent
 ```bash
@@ -83,3 +83,5 @@ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -m ec2 -a 
 | Network | bytes_sent/recv, packets_sent/recv |
 
 Logs được đẩy lên CloudWatch Log Groups: `/ec2/system/messages`, `/ec2/system/syslog`
+###  Ảnh minh chứng Cloudwatch chạy trên EC2
+![cloudwatch-ec2](cloudwatch-ec2.jpg)
